@@ -59,13 +59,6 @@ export default function HomePage() {
       color: "text-green-500",
     },
     {
-      id: "eshop",
-      icon: ShoppingBag,
-      label: "Nintendo eShop",
-      color: "text-red-500",
-      href: "/eshop/featured",
-    },
-    {
       id: "screenshots",
       icon: ImageIcon,
       label: "Screenshots",
