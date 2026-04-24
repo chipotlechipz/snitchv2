@@ -1,5 +1,6 @@
 import { MouseEvent, useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 
 import gameCover from "@/app/assets/game-cover.jpg"
 import gameCover2 from "@/app/assets/game-cover2.jpg"
@@ -44,8 +45,20 @@ export function GameGrid() {
         onMouseLeave={handleMouseLeave}
       >
         <div className="flex w-[calc(100%+25%)] gap-4 pb-4">
-          <GameCard image={gameCover} alt="Mario game" />
-          <GameCard image={gameCover2} alt="Donkey Kong game" />
+          <GameCard
+            image={gameCover}
+            alt="Mario game"
+            link="/games/mario"
+            isDragging={isDragging}
+          />
+
+          <GameCard
+            image={gameCover2}
+            alt="Donkey Kong game"
+            link="/games/donkey-kong"
+            isDragging={isDragging}
+          />
+
           {[...Array(5)].map((_, i) => (
             <EmptyGameCard key={i} />
           ))}
@@ -58,11 +71,17 @@ export function GameGrid() {
 interface GameCardProps {
   image: any
   alt: string
+  link: string
+  isDragging: boolean
 }
 
-function GameCard({ image, alt }: GameCardProps) {
+function GameCard({ image, alt, link, isDragging }: GameCardProps) {
   return (
-    <div className="group shadow-m relative aspect-square w-[calc(30%-24px)] flex-none rounded-xl lg:w-[calc(20%-12px)]">
+    <Link
+      href={isDragging ? "#" : link} // prevent accidental navigation while dragging
+      draggable={false}
+      className="group shadow-m relative aspect-square w-[calc(30%-24px)] flex-none rounded-xl lg:w-[calc(20%-12px)]"
+    >
       <Image
         src={image.src}
         alt={alt}
@@ -72,7 +91,7 @@ function GameCard({ image, alt }: GameCardProps) {
         draggable="false"
       />
       <div className="group-hover:gradient-bg absolute inset-0 top-1/2 left-1/2 z-1 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white"></div>
-    </div>
+    </Link>
   )
 }
 
