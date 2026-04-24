@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "scripts": {
+  "build": "next build && next export"
+},
+
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
